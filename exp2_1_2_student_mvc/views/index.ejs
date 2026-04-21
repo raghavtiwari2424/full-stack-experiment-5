@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title><%= title %></title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: #f5f5f5; }
+    h1   { color: #333; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+    .btn         { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; }
+    .btn-primary { background: #007bff; color: white; }
+    .btn-warning { background: #ffc107; color: #333; }
+    .btn-danger  { background: #dc3545; color: white; }
+    table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; }
+    th    { background: #007bff; color: white; padding: 12px; text-align: left; }
+    td    { padding: 12px; border-bottom: 1px solid #eee; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f0f7ff; }
+    .actions { display: flex; gap: 8px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .count   { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>🎓 Student Management System</h1>
+
+  <div class="top-bar">
+    <span class="count">Total Students: <strong><%= students.length %></strong></span>
+    <a href="/students/new" class="btn btn-primary">+ New Student</a>
+  </div>
+
+  <% if (students.length === 0) { %>
+    <!-- EJS if block: only shown when array is empty -->
+    <p style="text-align:center; color:#999; padding:40px;">No students found. Add one above!</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Roll</th><th>Name</th><th>Email</th><th>Course</th><th>Marks</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- EJS forEach loop: renders one <tr> per student -->
+        <% students.forEach(student => { %>
+          <tr>
+            <td><%= student.roll %></td>
+            <td><%= student.name %></td>
+            <td><%= student.email %></td>
+            <td><%= student.course %></td>
+            <td><%= student.marks %></td>
+            <td class="actions">
+              <a href="/students/<%= student._id %>/edit" class="btn btn-warning">Edit</a>
+              <!-- HTML forms can't send DELETE, so we use POST with /delete route -->
+              <form action="/students/<%= student._id %>/delete" method="POST"
+                    onsubmit="return confirm('Delete this student?')">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>

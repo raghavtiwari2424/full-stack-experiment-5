@@ -88,3 +88,9 @@ Render	Yes	Best free option for Node.js
 Railway	Yes	Easy MongoDB + Node combo
 Cyclic	Yes	Simple Node.js hosting
 For lab/college purposes, running locally with node server.js is the standard approach.
+
+Platform	Free Tier	Notes
+Render	Yes	Best free option for Node.js
+Railway	Yes	Easy MongoDB + Node combo
+Cyclic	Yes	Simple Node.js hosting
+For lab/college purposes, running locally with node server.js is the standard approach.
